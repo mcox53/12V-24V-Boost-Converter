@@ -7,9 +7,8 @@ s = tf('s');
 % small signal variations in output voltage in terms 
 % of small signal variations in duty cycle for a 
 % given input voltage. Duty cycle with a capital D
-% is the duty cycle for 24V output with an ideal boost converter.
-% Compensating and closing the loop allows for corrections
-% to be made around the setpoint but you already knew that.
+% is the duty cycle for 24V output with an ideal boost 
+% converter calculated previousy 
 
 Vin = 13.3;
 D = .7677;
@@ -17,6 +16,7 @@ D = .7677;
 % This model takes into account ESR of both the inductor
 % as well as the capacitor
 
+% Change these values once parts are selected
 Rout = 24;
 Cout = 4.7e-6;
 CoutESR = 2e-3;

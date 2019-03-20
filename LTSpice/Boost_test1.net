@@ -1,0 +1,24 @@
+* C:\Users\Matt\Dropbox\Documents\GitHub\12V-24V-Boost-Converter\LTSpice\Boost_test1.asc
+M1 N001 G 0 0 AP9465GEM
+V1 Vbat 0 12V
+L1 Vbat N001 3.7m
+D1 N001 N002 MMSD4148
+C1 N002 0 220µ
+R1 N002 0 50
+V2 PWM 0 PULSE(0 12 0 1n 1n 125u 250u)
+Q1 Vbat N003 N004 0 2N5210
+Q2 0 N003 N004 0 2N5087
+R2 G N004 33
+R3 Vbat N003 2K
+M2 N003 PWM 0 0 BSZ060NE2LS
+.model D D
+.lib C:\Users\Matt\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NPN NPN
+.model PNP PNP
+.lib C:\Users\Matt\Documents\LTspiceXVII\lib\cmp\standard.bjt
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\Matt\Documents\LTspiceXVII\lib\cmp\standard.mos
+.tran 100m
+.backanno
+.end
