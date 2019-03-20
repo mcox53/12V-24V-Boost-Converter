@@ -1,3 +1,6 @@
+clear
+clc
+
 % Modify parameters before running script
 Vinmin = 8;
 Vinnom = 13.3;
