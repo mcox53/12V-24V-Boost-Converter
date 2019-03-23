@@ -11,6 +11,7 @@ s = tf('s');
 % converter calculated previousy 
 
 Vin = 11;
+fsw = 70000;
 D = .7677;
 
 % This model takes into account ESR of both the inductor
@@ -31,4 +32,55 @@ wo = ((1)/(sqrt(L*Cout)))* sqrt((L_ESR + ((1-D)^2)*Rout)/(Rout));
 Q = (wo)/((L_ESR/L)+(1/(Cout*(Rout+CoutESR))));
 
 tf = Gdo * ((1+(s/wz1))*(1-(s/wz2)))/(1+(s/(wo*Q))+((s^2)/(wo^2)));
+
+%% Type III Compensator
+
+% From voltage divider
+R1 = 118000;
+
+% Choose first capacitor value arbitrarily
+% First pole should be placed as close to origin
+% as possible to form integrator
+C1 = 2.2e-5;
+
+% Compensator zeros are placed around the resonsant
+% frequency spike of the LC filter
+
+% Arbitrarily selected resonant boundaries used to
+% solve for capacitor and resistor values
+
+wresleft = 190;
+wresright = 800;
+
+R2 = 1/(wresright * C1);
+
+% Second pole goes at ESR zero frequency of power stage
+% Need to either pick R3 or C2 here since only two zeros
+% Another option is to pick half the switching frequency
+C2 = 4.7e-9;
+
+% Now have enough info to get R3 from other resonant boundary
+
+R3 = (1/(wresleft*C2)) - R1;
+
+% Third pole goes at right hand plane zero frequency
+
+wrhpzero = 1.068e3;
+
+C3 = 1/(R2*wrhpzero);
+
+% Assert R3 is positive
+
+wp0 = 1/(R1*C1);
+wp1 = 1/(R3*C2);
+wp2 = 1/(R2*C3);
+wz3 = 1/((R1+R3)*C2);
+wz4 = 1/(R2*C1);
+
+comp = (wp0 * (1+(s/wz1))*(1+(s/wz2)))/(s*(1+(s/wp1))*(1+(s/wp2)));
+
+
+
+
+
 
