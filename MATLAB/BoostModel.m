@@ -10,7 +10,7 @@ s = tf('s');
 % is the duty cycle for 24V output with an ideal boost 
 % converter calculated previousy 
 
-Vin = 13.3;
+Vin = 11;
 D = .7677;
 
 % This model takes into account ESR of both the inductor
@@ -18,10 +18,10 @@ D = .7677;
 
 % Change these values once parts are selected
 Rout = 24;
-Cout = 4.7e-6;
-CoutESR = 2e-3;
-L = 3.3e-6;
-L_ESR = 2.3e-3;
+Cout = 2.2e-4;
+CoutESR = .18;
+L = .0012;
+L_ESR = .232;
 
 Gdo = Vin/((1-D)^2);
 
