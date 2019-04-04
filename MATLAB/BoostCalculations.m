@@ -2,16 +2,16 @@ clear
 clc
 
 % Modify parameters before running script
-Vinmin = 11;
-Vinnom = 13.3;
-Vinmax = 14;
+Vinmin = 16;
+Vinnom = 18;
+Vinmax = 20;
 Vout = 24;
 IOmax = 1.5;
 Vrip = .09;
-Irip = .2;
+Irip = .04;
 fsw = 70000;
 Vdfw = 0.7;
-Rload = 16;
+Rload = 24;
 
 % Estimated Efficiency
 eff = .7;

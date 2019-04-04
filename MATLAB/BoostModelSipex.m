@@ -1,3 +1,5 @@
+% Boost Model translated to standard part values
+
 clear
 clc
 
@@ -36,12 +38,12 @@ tf = Gdo * ((1+(s/wz1))*(1-(s/wz2)))/(1+(s/(wo*Q))+((s^2)/(wo^2)));
 %% Type III Compensator
 
 % From voltage divider
-R1 = 1300000;
+R1 = 118000;
 
 % Choose first capacitor value arbitrarily
 % First pole should be placed as close to origin
 % as possible to form integrator
-C1 = 2.2e-6;
+C1 = 3.74e-10;
 
 % Compensator zeros are placed around the resonsant
 % frequency spike of the LC filter
@@ -49,25 +51,25 @@ C1 = 2.2e-6;
 % Arbitrarily selected resonant boundaries used to
 % solve for capacitor and resistor values
 
-wresleft = 495;
-wresright = 1550;
+wresleft = 100;
+wresright = 1000;
 
-R2 = 1/(wresright * C1);
+R2 = 127000;
 
 % Second pole goes at ESR zero frequency of power stage
 % Need to either pick R3 or C2 here since only two zeros
 % Another option is to pick half the switching frequency
-C2 = 4.7e-10;
+C2 = 7.257e-9;
 
 % Now have enough info to get R3 from other resonant boundary
 
-R3 = (1/(wresleft*C2)) - R1;
+R3 = 313;
 
 % Third pole goes at right hand plane zero frequency
 
-wrhpzero = 4.31e3;
+wrhpzero = 1.068e3;
 
-C3 = 1/(R2*wrhpzero);
+C3 = 1e-12;
 
 % Assert R3 is positive
 
@@ -80,8 +82,3 @@ wz4 = 1/(R2*C1);
 comp = (wp0 * (1+(s/wz1))*(1+(s/wz2)))/(s*(1+(s/wp1))*(1+(s/wp2)));
 
 bode(comp)
-test = feedback(comp*tf, (1/9.6))
-
-
-
-
